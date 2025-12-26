@@ -300,10 +300,10 @@ spec:
 ```
 
 ```bash
-nano manifests/testing/hello-service.yaml
+nano manifests/testing/hello-nginx-service.yaml
 ```
 
-`manifests/testing/hello-service.yaml`
+`manifests/testing/hello-nginx-service.yaml`
 
 ```yml
 apiVersion: v1
