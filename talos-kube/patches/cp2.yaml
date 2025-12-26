@@ -1,0 +1,18 @@
+# patches/cp2.yaml
+machine:
+  network:
+    interfaces:
+      - interface: eth0
+        dhcp: false
+        addresses:
+          - 192.168.88.52/24
+        routes:
+          - network: 0.0.0.0/0
+            gateway: 192.168.88.1
+        vip:
+          ip: 192.168.88.50
+---
+apiVersion: v1alpha1
+kind: HostnameConfig
+auto: off
+hostname: talos-kube-cp2

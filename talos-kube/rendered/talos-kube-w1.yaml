@@ -1,0 +1,72 @@
+version: v1alpha1
+debug: false
+persist: true
+machine:
+    type: worker
+    token: 7lf36u.tjuignbpp20jko1b
+    ca:
+        crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJQakNCOGFBREFnRUNBaEE0TDYwMU1UK01VY2RlQ291ZDlQRFpNQVVHQXl0bGNEQVFNUTR3REFZRFZRUUsKRXdWMFlXeHZjekFlRncweU5URXlNalV3TXpNeU1UVmFGdzB6TlRFeU1qTXdNek15TVRWYU1CQXhEakFNQmdOVgpCQW9UQlhSaGJHOXpNQ293QlFZREsyVndBeUVBUW1VU1NhdmFNN0RtQ2NTZ2JpZzZMdmNQOVI4ZURFNXIrOHloCjdMSUJqSXVqWVRCZk1BNEdBMVVkRHdFQi93UUVBd0lDaERBZEJnTlZIU1VFRmpBVUJnZ3JCZ0VGQlFjREFRWUkKS3dZQkJRVUhBd0l3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekFkQmdOVkhRNEVGZ1FVdk1ZUkpYRWF2c3EzMk9GUgpTRW5DVkxybVZZOHdCUVlESzJWd0EwRUFXMlJYK2V2Z2tJOE5yMmZHTnVYRTRlZEJKdU9wc0syMC80ZE9yS3k1CnFEelpTMjBRQVQ2YjBWcWxXNy8wTlpwcU1GSGNBeHVXbnl1ZWdOVVNBTCswREE9PQotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+        key: ""
+    certSANs: []
+    kubelet:
+        image: ghcr.io/siderolabs/kubelet:v1.35.0
+        defaultRuntimeSeccompProfileEnabled: true
+        disableManifestsDirectory: true
+    network:
+        interfaces:
+            - interface: eth0
+              addresses:
+                - 192.168.88.54/24
+              routes:
+                - network: 0.0.0.0/0
+                  gateway: 192.168.88.1
+              dhcp: false
+    install:
+        disk: /dev/sda
+        image: factory.talos.dev/nocloud-installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.12.0
+        wipe: false
+        grubUseUKICmdline: true
+    features:
+        diskQuotaSupport: true
+        kubePrism:
+            enabled: true
+            port: 7445
+        hostDNS:
+            enabled: true
+            forwardKubeDNSToHost: true
+cluster:
+    id: grGSrtFmAtzwbM1kybtoMsQ74xiRoergDzug-TuhiJA=
+    secret: mAJY2mDsXO9lBffIWo2RRr2IJAmkYBDLrEsG/biLQh0=
+    controlPlane:
+        endpoint: https://192.168.88.50:6443
+    clusterName: talos-kube
+    network:
+        dnsDomain: cluster.local
+        podSubnets:
+            - 10.244.0.0/16
+        serviceSubnets:
+            - 10.96.0.0/12
+    token: bwdc8r.ah1447vd8whsovqc
+    ca:
+        crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSUJpekNDQVRDZ0F3SUJBZ0lSQVBhemoyQUF3cGppS1RQbWZiU3RlQUF3Q2dZSUtvWkl6ajBFQXdJd0ZURVQKTUJFR0ExVUVDaE1LYTNWaVpYSnVaWFJsY3pBZUZ3MHlOVEV5TWpVd016TXlNVFZhRncwek5URXlNak13TXpNeQpNVFZhTUJVeEV6QVJCZ05WQkFvVENtdDFZbVZ5Ym1WMFpYTXdXVEFUQmdjcWhrak9QUUlCQmdncWhrak9QUU1CCkJ3TkNBQVRNTWxLZVVoTXBHalBjeFNWUnlXZmJhRFFLV1FVMC96UVVjai91bktWcWNmb1hmZ2kzUVExRWgvd1kKWFlueFlPaDVsaGhmdnNEeGowYW1QUnlYSWpYWW8yRXdYekFPQmdOVkhROEJBZjhFQkFNQ0FvUXdIUVlEVlIwbApCQll3RkFZSUt3WUJCUVVIQXdFR0NDc0dBUVVGQndNQ01BOEdBMVVkRXdFQi93UUZNQU1CQWY4d0hRWURWUjBPCkJCWUVGT1U5NVhXMFM5dGtQa3lUWVJnQjJLMWJDTy9JTUFvR0NDcUdTTTQ5QkFNQ0Ewa0FNRVlDSVFEcHYrbTIKbFRDVkJwMzRwcjNRUFE2SHRNVm9FdEY5dE50M2VMRWhiOWtWa1FJaEFNZVJ1bFAxY1czOWdrRXVHM01mV09QcgpvQ1RIZmpTRjh2YlVTVG81VG1kMAotLS0tLUVORCBDRVJUSUZJQ0FURS0tLS0tCg==
+        key: ""
+    discovery:
+        enabled: true
+        registries:
+            kubernetes:
+                disabled: true
+            service: {}
+---
+apiVersion: v1alpha1
+kind: HostnameConfig
+auto: "off"
+hostname: talos-kube-w1
+---
+apiVersion: v1alpha1
+kind: ResolverConfig
+nameservers:
+    - address: 192.168.88.1
+searchDomains:
+    domains:
+        - fouchger.uk
+    disableDefault: false

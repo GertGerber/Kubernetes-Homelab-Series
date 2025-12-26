@@ -1,0 +1,9 @@
+# patches/resolvers.yaml
+apiVersion: v1alpha1
+kind: ResolverConfig
+nameservers:
+  - address: 192.168.88.1
+searchDomains: # optional
+    domains:
+        - fouchger.uk
+    disableDefault: false

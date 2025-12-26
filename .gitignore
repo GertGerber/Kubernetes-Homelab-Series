@@ -3,3 +3,8 @@ talosconfig
 controlplane.yaml
 worker.yaml
 kubeconfig
+talos-kube/.sops.yaml
+talos-kube/age.key
+*.tar.gz
+talos-kube/age/age
+talos-kube/age/age-keygen

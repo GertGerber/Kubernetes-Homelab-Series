@@ -9,6 +9,9 @@
 - [2. Why ingress is not “just layer 7 load balancing”](#2-why-ingress-is-not-just-layer-7-load-balancing)
 - [3. Scope and non-goals](#3-scope-and-non-goals)
 - [4. Selecting an ingress controller](#4-selecting-an-ingress-controller)
+- [5. Ingress as shared infrastructure](#5-ingress-as-shared-infrastructure)
+- [6. Installing the ingress controller](#6-installing-the-ingress-controller)
+  - [6.1 Repository location](#61-repository-location)
 <!-- /TOC -->
 
 ---
@@ -92,3 +95,34 @@ For this series, Traefik is used because it:
 - Supports gradual adoption of more advanced features
 
 The choice of controller is less important than how it is operated. The patterns described here apply regardless of implementation.
+
+---
+
+## 5. Ingress as shared infrastructure
+
+An ingress controller is not an application component. It is shared infrastructure.
+
+This has several implications:
+
+- It should be deployed and upgraded deliberately
+- Configuration changes affect multiple workloads
+- Resource isolation and failure domains matter
+
+Treating ingress as “just another deployment” increases the blast radius of mistakes. Instead, it should be managed with the same care as load balancing and secrets.
+
+---
+
+## 6. Installing the ingress controller
+
+Ingress controllers are installed as Kubernetes workloads, but their manifests should be treated as platform intent rather than application code.
+
+### 6.1 Repository location
+
+Ingress manifests should live alongside other cluster-level intent:
+
+```text
+manifests/ingress/
+```
+
+
+This keeps them clearly separated from application workloads.

@@ -1,0 +1,7 @@
+creation_rules:
+  - path_regex: '(^|.*/)secrets(\.encrypted)?\.ya?ml$'
+    age: age1replace-with-your-public-key
+
+  - path_regex: '(^|.*/)(controlplane|worker)(\.encrypted)?\.ya?ml$'
+    encrypted_regex: '(^token|crt|key|id|secret|secretboxEncryptionSecret)$'
+    age: age1replace-with-your-public-key
